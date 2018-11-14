@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import vistas.JarraView;
@@ -15,15 +16,24 @@ public class ProyectoJarra {
     private JLabel lblCantidadAgua1;
     private JLabel lblCantidadAgua2;
     private JLabel lblCantidadAgua3;
-    private JarraView jarraView;
+    private JLabel lblJarra1;
+    private JLabel lblJarra2;
+    private JLabel lblJarra3;
     private ArrayList<Proceso> listaProcesos = new ArrayList<>();
             
 
-    public ProyectoJarra(JLabel lblCantidadAgua1, JLabel lblCantidadAgua2, JLabel lblCantidadAgua3, JarraView jarraView) {
+    public ProyectoJarra(JLabel lblCantidadAgua1,
+            JLabel lblCantidadAgua2,
+            JLabel lblCantidadAgua3,
+            JLabel lblJarra1,
+            JLabel lblJarra2,
+            JLabel lblJarra3) {
         this.lblCantidadAgua1 = lblCantidadAgua1;
         this.lblCantidadAgua2 = lblCantidadAgua2;
         this.lblCantidadAgua3 = lblCantidadAgua3;
-        this.jarraView = jarraView;
+        this.lblJarra1 = lblJarra1;
+        this.lblJarra2 = lblJarra2;
+        this.lblJarra3 = lblJarra3;
     }
     
 
@@ -46,6 +56,9 @@ public class ProyectoJarra {
         LlenarJarras llenarJarras = new LlenarJarras(lblCantidadAgua1,
                         lblCantidadAgua2,
                         lblCantidadAgua3,
+                        lblJarra1,
+                        lblJarra2,
+                        lblJarra3,
                         listaProcesos);
         
         //iniciar pintando en la vista
