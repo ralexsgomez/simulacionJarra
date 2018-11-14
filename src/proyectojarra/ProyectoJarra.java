@@ -3,15 +3,29 @@ package proyectojarra;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import vistas.JarraView;
 
 public class ProyectoJarra {
+    
+    private JLabel lblCantidadAgua1;
+    private JLabel lblCantidadAgua2;
+    private JLabel lblCantidadAgua3;
+    private JarraView jarraView;
+    private ArrayList<Proceso> listaProcesos = new ArrayList<>();
+            
 
-    public static void main(String[] args) {
-        new JarraView().setVisible(true);
-//        ProyectoJarra pj = new ProyectoJarra();
-//        pj.iniciarJArras(32, 20, 12);
+    public ProyectoJarra(JLabel lblCantidadAgua1, JLabel lblCantidadAgua2, JLabel lblCantidadAgua3, JarraView jarraView) {
+        this.lblCantidadAgua1 = lblCantidadAgua1;
+        this.lblCantidadAgua2 = lblCantidadAgua2;
+        this.lblCantidadAgua3 = lblCantidadAgua3;
+        this.jarraView = jarraView;
     }
+    
 
     public void iniciarJArras(int capacidad1, int capacidad2, int capacidad3) {
         Jarra jarraA = new Jarra(capacidad1, true);
@@ -27,6 +41,16 @@ public class ProyectoJarra {
             this.moverAgua(listaJarras.get(1), listaJarras.get(2));
             this.vaciarJarras(listaJarras);
         }
+        
+        
+        LlenarJarras llenarJarras = new LlenarJarras(lblCantidadAgua1,
+                        lblCantidadAgua2,
+                        lblCantidadAgua3,
+                        listaProcesos);
+        
+        //iniciar pintando en la vista
+        Thread thread = new Thread(llenarJarras);
+        thread.start();
     }
 
     //mover el valor menor de las jarras a la jarra Menor
@@ -42,9 +66,12 @@ public class ProyectoJarra {
             }
             if (jarraSiguiente.tieneCapcidad()){
                 this.moverAgua(listaJarras.get(i), jarraSiguiente);
-            } else {
             }
-            
+            Proceso proceso = new Proceso(String.valueOf(listaJarras.get(0).cantidadAgua()),
+                    String.valueOf(listaJarras.get(1).cantidadAgua()),
+                    String.valueOf(listaJarras.get(2).cantidadAgua())
+            );
+            listaProcesos.add(proceso);
             System.out.println(" " + listaJarras.get(0).cantidadAgua() + "  " + listaJarras.get(1).cantidadAgua()  + "  " + listaJarras.get(2).cantidadAgua());
             //salir del sistema cuando encuentre el resultado
             if (listaJarras.get(0).cantidadAgua() == listaJarras.get(1).cantidadAgua()) break;
